@@ -5,7 +5,7 @@
         <!-- start group loop -->
         <{foreach item=group from=$block.groups}>
             <tr>
-                <th colspan="2"><{$group.name}></th>
+                <th colspan="2"><{$group.name|default:''}></th>
             </tr>
             <!-- start group member loop -->
             <{foreach item=user from=$group.users}>
@@ -16,7 +16,7 @@
                     </td>
                     <td class="odd width20 txtright alignmiddle">
                         <a href="javascript:openWithSelfMain('<{$xoops_url}>/pmlite.php?send2=1&to_userid=<{$user.id}>','pmlite',565,500);">
-                            <span class="fa fa-envelope fa-lg" aria-hidden="true"></span>
+                        <span class="fa fa-envelope fa-lg" aria-hidden="true"></span>
                         </a>
                     </td>
                 </tr>

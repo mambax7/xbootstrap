@@ -1,7 +1,7 @@
 <h4><{$smarty.const._PM_PRIVATEMESSAGE}></h4>
 <div class="current-tab">
     <div class="row">
-        <{if $op == "out"}>
+        <{if $op|default:'' == "out"}>
             <div class="col-xs-6 col-md-6">
                 <a class="btn btn-info btn-block" href="viewpmsg.php?op=in" title="<{$smarty.const._PM_INBOX}>"><{$smarty.const._PM_INBOX}></a>
             </div>
@@ -27,7 +27,7 @@
 </div><!-- .current-tab -->
 
 <div class="message-current-tab">
-    <{if $op == "out"}>
+    <{if $op|default:'' == "out"}>
         <div class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <strong><{$smarty.const._PM_OUTBOX}></strong>
@@ -45,21 +45,21 @@
     <{/if}>
 </div><!-- .message-current-tab -->
 
-<{if $msg}>
+<{if $msg|default:false}>
     <div class="alert alert-info alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong><{$msg}></strong>
     </div>
 <{/if}>
 
-<{if $errormsg}>
+<{if $errormsg|default:false}>
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong><{$errormsg}></strong>
     </div>
 <{/if}>
 
-<{if $pagenav}>
+<{if $pagenav|default:false}>
     <{$pagenav}>
 <{/if}>
 
@@ -72,7 +72,7 @@
                 <span class="glyphicon glyphicon-circle-arrow-down btn btn-xs btn-primary"></span>
             </div>
 
-            <{if $op == "out"}>
+            <{if $op|default:'' == "out"}>
                 <div class="col-xs-2 col-md-2"><strong><{$smarty.const._PM_TO}></strong></div>
             <{else}>
                 <div class="col-xs-2 col-md-2"><strong><{$smarty.const._PM_FROM}></strong></div>
@@ -93,26 +93,26 @@
         <{/if}>
     </div><!-- .xoops-message-list -->
 
-    <{foreach item=message from=$messages}>
+    <{foreach item=message from=$messages|default:null}>
         <div class="row xoops-message-list xoops-message-loop">
             <div class="col-xs-3 col-md-2">
                 <input type="checkbox" id="msg_id_<{$message.msg_id}>" name='msg_id[]' value="<{$message.msg_id}>">
                 &nbsp;
-                <{if $message.read_msg == 1}>
-                    <span class="glyphicon glyphicon-ok-sign btn btn-xs btn-success"></span>
-                <{else}>
-                    <span class="glyphicon glyphicon-envelope btn btn-xs btn-warning" title="<{$smarty.const._PM_NOTREAD}>"></span>
-                <{/if}>
-                <{if $message.msg_image != ""}>
-                    <img src="<{$xoops_url}>/images/subject/<{$message.msg_image}>" alt="">
-                <{/if}>
+            <{if $message.read_msg == 1}>
+                <span class="glyphicon glyphicon-ok-sign btn btn-xs btn-success"></span>
+            <{else}>
+                <span class="glyphicon glyphicon-envelope btn btn-xs btn-warning" title="<{$smarty.const._PM_NOTREAD}>"></span>
+            <{/if}>
+            <{if $message.msg_image != ""}>
+                <img src="<{$xoops_url}>/images/subject/<{$message.msg_image}>" alt="">
+            <{/if}>
             </div>
             <div class="col-xs-2 col-md-2">
-                <{if $message.postername != ""}>
-                    <a href="<{$xoops_url}>/userinfo.php?uid=<{$message.posteruid}>" title=""><{$message.postername}></a>
-                <{else}>
-                    <{$anonymous}>
-                <{/if}>
+            <{if $message.postername != ""}>
+                <a href="<{$xoops_url}>/userinfo.php?uid=<{$message.posteruid}>" title=""><{$message.postername}></a>
+            <{else}>
+                <{$anonymous}>
+            <{/if}>
             </div>
 
             <div class="col-xs-4 col-md-5">
@@ -143,6 +143,6 @@
     <{/foreach}>
 </form>
 
-<{if $pagenav}>
+<{if $pagenav|default:false}>
     <{$pagenav}>
 <{/if}>

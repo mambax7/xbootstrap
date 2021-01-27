@@ -9,21 +9,15 @@
 </style>
 <script>
     $(document).ready(function () {
-        jQuery("#articleslider").owlCarousel({
-            navigation: false,
-            slideSpeed: 300,
-            paginationSpeed: 400,
-            singleItem: true,
+        $(".owl-carousel").owlCarousel({
+            margin: 10,
             autoHeight: true,
-            transitionStyle: "fade"
-
-            // "singleItem:true" is a shortcut for:
-            // items : 1,
-            // itemsDesktop : false,
-            // itemsDesktopSmall : false,
-            // itemsTablet: false,
-            // itemsMobile : false
-
+            autoplay: true,
+            items: 1,
+            dotsEach: true,
+            dots: true,
+            loop: true,
+            autoplayHoverPause: true
         });
     });
 </script>
@@ -56,7 +50,7 @@
     <{if $item.image_path || $item.images}>
         <figure>
             <{if $item.images}>
-                <div id="articleslider" style="margin-bottom:10px;">
+                <div id="articleslider" class="owl-carousel owl-theme" style="margin-bottom:10px;">
                     <div class="item">
                         <img class="img-responsive" src="<{$item.image_path}>"/>
                     </div>
@@ -85,12 +79,22 @@
 <{/if}>
 <div class="clearfix"></div>
 <div class="pub_article_extras">
-    <{if $rating_enabled}>
+
+    <{if $rating_enabled|default:false}>
         <div class="pull-left">
             <small><{$item.ratingbar}></small>
         </div>
     <{/if}>
     <div class="pull-right text-right">
+
+        <{if $display_print_link|default:0 !=0}>
+            <{$item.printlink}>
+        <{/if}>
+        <{if $display_pdf_button|default:0 !=0}>
+            <{$item.pdfbutton}>
+        <{/if}>
+
+
         <{$item.adminlink}>
     </div>
     <div class="clearfix"></div>
@@ -157,17 +161,17 @@
 
 <!-- Other articles in the category -->
 <{if $other_items == "previous_next"}>
-    <{if $previous_item_link || $next_item_link}>
-        <{if $previous_item_link}>
+    <{if $previous_item_link|default:'' || $next_item_link|default:''}>
+        <{if $previous_item_link|default:''}>
             <div class="pull-left">
                 <a href="<{$previous_item_url}>">
                     <img style="vertical-align: middle;" src="<{$publisher_images_url}>/links/previous.gif" title="<{$smarty.const._MD_PUBLISHER_PREVIOUS_ITEM}>"
                          alt="<{$smarty.const._MD_PUBLISHER_PREVIOUS_ITEM}>"/>
                 </a>
-                <{$previous_item_link}>
+                <{$previous_item_link|default:''}>
             </div>
         <{/if}>
-        <{if $next_item_link}>
+        <{if $next_item_link|default:''}>
             <div class="text-right">
                 <{$next_item_link}>
                 <a href="<{$next_item_url}>">
@@ -209,7 +213,7 @@
 <{/if}>
 <!-- END Other articles in the category -->
 
-<{if $tagbar}>
+<{if $tagbar|default:false}>
     <p><{include file="db:tag_bar.tpl"}></p>
 <{/if}>
 

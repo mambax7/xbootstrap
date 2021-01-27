@@ -1,4 +1,4 @@
-xBootstrap is a powerful theme for XOOPS (https://xoops.org/)!
+xBootstrap is a powerful theme for XOOPS (http://xoops.org/)!
 
 Built with:
 - Bootstrap 3:      http://getbootstrap.com/
@@ -14,7 +14,7 @@ URL: www.angelorocha.com.br
 XOOPS Fire (Brazillian Support): www.xoopsfire.com
 Google Plus:        https://plus.google.com/+AngeloRocha
 Twitter:            https://twitter.com/_AngeloRocha
-Linkedin:           http://br.linkedin.com/in/angelorocha
+Linkedin:           https://br.linkedin.com/in/angelorocha
 Github:             https://github.com/angelorocha
 
 --------------------------------------------------------------------------
