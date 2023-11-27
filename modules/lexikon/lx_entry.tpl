@@ -16,7 +16,7 @@
     -->
 </style>
 <{* needed for baloon tips*}>
-<{if $balloontips}>
+<{if isset($balloontips)}>
     <div id="bubble_tooltip">
         <div class="bubble_top"><span></span></div>
         <div class="bubble_middle">
@@ -40,7 +40,7 @@
 
     <ul class="pagination pagination-sm">
       <li><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/letter.php" title="[ <{$publishedwords}> ]"><{$smarty.const._MD_LEXIKON_ALL}></a></li>
-      <{foreach item=letterlinks from=$alpha.initial}>
+      <{foreach item=letterlinks from=$alpha.initial|default:null}>
           <{if $letterlinks.total > 0}>
             <li><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/letter.php?init=<{$letterlinks.id}>" title="[ <{$letterlinks.total}> ]" >
               <{$letterlinks.linktext}>
@@ -50,7 +50,7 @@
           <{/if}>
       <{/foreach}>
 
-      <{if $totalother > 0}>
+      <{if isset($totalother) && $totalother > 0}>
         <li><a href="<{$xoops_url}>/modules/<{$lang_moduledirname}>/letter.php?init=<{$smarty.const._MD_LEXIKON_OTHER}>" title="[ <{$totalother}> ]">
           <{$smarty.const._MD_LEXIKON_OTHER}>
         </a></li>
@@ -67,7 +67,7 @@
     <div class="col-md-12">
         <div style="margin-bottom: 15px">
         <h4><{$thisterm.term}><{$microlinks}></h4>
-        <{if $multicats == 1}>
+        <{if isset($multicats) && $multicats == 1}>
             <a href="<{$xoops_url}>/modules/<{$thisterm.dir}>/category.php?categoryID=<{$thisterm.categoryID}>"><span class="label label-info"><{$thisterm.catname}></span></a>
         <{/if}>
         </div>
@@ -101,13 +101,13 @@
         <div class="entryfooter">
             <span class="standard">
                 <{$microlinksnew}>
-            <{if $bookmarkme == 3}>
+            <{if isset($bookmarkme) && $bookmarkme == 3}>
                 &nbsp; <!-- AddThis Bookmark Button -->
-                <a href="http://www.addthis.com/bookmark.php" onclick="addthis_url = location.href; addthis_title = document.title; return addthis_click(this);" target="_blank">
+                <a href="https://www.addthis.com/bookmark.php" onclick="addthis_url = location.href; addthis_title = document.title; return addthis_click(this);" target="_blank">
                     <img src="assets/images/addthis_button1-bm.gif" align="absmiddle" width="125" height="16" border="0" alt="AddThis Social Bookmark Button"/>
                 </a>
                 <script type="text/javascript">var addthis_pub = 'JJXUY2C9CQIWTKI1';</script>
-                <script type="text/javascript" src="http://s9.addthis.com/js/widget.php?v=10"></script>
+                <script type="text/javascript" src="https://s9.addthis.com/js/widget.php?v=10"></script>
             <{elseif $bookmarkme == 4}>
                 &nbsp; <!-- AddThis Bookmark dropdown -->
                 <script type="text/javascript">
@@ -115,7 +115,7 @@
                   addthis_title = document.title;
                   addthis_pub = 'JJXUY2C9CQIWTKI1';
                 </script>
-                <script type="text/javascript" src="http://s7.addthis.com/js/addthis_widget.php?v=12"></script>
+                <script type="text/javascript" src="https://s7.addthis.com/js/addthis_widget.php?v=12"></script>
             <{/if}>
             </span>
         </div>        
@@ -124,10 +124,10 @@
 
 <div class="row">
     <div class="col-md-12">
-        <{if $bookmarkme == 2}>
+        <{if isset($bookmarkme) && $bookmarkme == 2}>
             <{include file="db:lx_bookmark.tpl"}>
         <{/if}>
-        <{if $tagbar|default:false}>
+        <{if !empty($tagbar)}>
             <div class="letters">
                 <{include file="db:lx_tag_bar.tpl"}>
             </div>
@@ -144,12 +144,14 @@
 
         <div style="margin: 3px; padding: 3px;">
             <!-- start comments loop -->
-            <{if $comment_mode == "flat"}>
-                <{include file="db:system_comments_flat.tpl"}>
-            <{elseif $comment_mode == "thread"}>
-                <{include file="db:system_comments_thread.tpl"}>
-            <{elseif $comment_mode == "nest"}>
-                <{include file="db:system_comments_nest.tpl"}>
+            <{if isset($comment_mode)}>
+                <{if $comment_mode == "flat"}>
+                    <{include file="db:system_comments_flat.tpl"}>
+                <{elseif $comment_mode == "thread"}>
+                    <{include file="db:system_comments_thread.tpl"}>
+                <{elseif $comment_mode == "nest"}>
+                    <{include file="db:system_comments_nest.tpl"}>
+                <{/if}>
             <{/if}>
             <!-- end comments loop -->
             <!-- end comments -->

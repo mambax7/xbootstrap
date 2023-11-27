@@ -29,7 +29,7 @@
     <!-- Multi-level Menu -->
     <link rel="stylesheet" type="text/css" href="<{xoImgUrl}>css/multilevelmenu.css">
 
-    <{if $xoops_dirname=='newbb'}>
+    <{if isset($xoops_dirname) && $xoops_dirname == 'newbb'}>
         <link rel="stylesheet" type="text/css" media="screen" href="<{xoImgUrl}>css/forums.css"/>
     <{/if}>
 
@@ -43,17 +43,17 @@
     <script src="<{xoImgUrl}>js/jquery.scrollUp.min.js"></script>
     <script src="<{xoImgUrl}>js/imagesloaded.pkgd.min.js"></script>
 
-<!--[if lt IE 9]>
-    <script src="http://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="http://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<!--[if < IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <script src="<{xoImgUrl}>js/selectivizr-min.js"></script>
 <![endif]-->
     <script src="<{xoImgUrl}>js/js.js"></script>
-    <link rel="alternate" type="application/rss+xml" title="" href="<{xoAppUrl backend.php}>">
+    <link rel="alternate" type="application/rss+xml" title="" href="<{xoAppUrl 'backend.php'}>">
 
-    <title><{if $xoops_dirname == "system"}><{$xoops_sitename}><{if $xoops_pagetitle !=''}> - <{$xoops_pagetitle}><{/if}><{else}><{if $xoops_pagetitle !=''}><{$xoops_pagetitle}> - <{$xoops_sitename}><{/if}><{/if}></title>
+    <title><{if isset($xoops_dirname) && $xoops_dirname == "system"}><{$xoops_sitename}><{if !empty($xoops_pagetitle)}> - <{$xoops_pagetitle}><{/if}><{else}><{if !empty($xoops_pagetitle)}><{$xoops_pagetitle}> - <{$xoops_sitename}><{/if}><{/if}></title>
 
-<{includeq file="$theme_name/tpl/shareaholic-script.tpl"}>
+<{include file="$theme_name/tpl/shareaholic-script.tpl"}>
 
 <{$xoops_module_header}>
 
@@ -61,14 +61,14 @@
 
 <body id="<{$xoops_dirname}>">
 
-<{includeq file="$theme_name/tpl/nav-menu.tpl"}>
+<{include file="$theme_name/tpl/nav-menu.tpl"}>
 
-<{includeq file="$theme_name/tpl/slider.tpl"}>
+<{include file="$theme_name/tpl/slider.tpl"}>
 <div class="container maincontainer">
 <a id="stickyMenuHere"></a>
-<{if $xoops_page == "index"}>
+<{if isset($xoops_page) && $xoops_page == "index"}>
     <div class="aligncenter home-message row">
-    <div class="<{if $xoops_banner != ""}>col-md-6<{else}>col-md-12<{/if}>">
+    <div class="<{if !empty($xoops_banner)}>col-md-6<{else}>col-md-12<{/if}>">
         <h2><{$smarty.const.THEME_ABOUTUS}></h2>
 
         <p class="lead"><{$xoops_meta_description}></p>
@@ -76,17 +76,17 @@
         <p><a href="javascript:;" class="btn btn-md btn-success"><{$smarty.const.THEME_LEARNINGMORE}></a></p>
     </div>
 
-    <{if $xoops_banner != ""}><div class="col-md-6"><div class="xoops-banner pull-right"><{$xoops_banner}></div></div><{/if}>
+    <{if !empty($xoops_banner)}><div class="col-md-6"><div class="xoops-banner pull-right"><{$xoops_banner}></div></div><{/if}>
 
     </div><!-- .home-message -->
 <{/if}>
 
 <div class="row">
-    <{includeq file="$theme_name/tpl/leftBlock.tpl"}>
+    <{include file="$theme_name/tpl/leftBlock.tpl"}>
 
-    <{includeq file="$theme_name/tpl/content-zone.tpl"}>
+    <{include file="$theme_name/tpl/content-zone.tpl"}>
 
-    <{includeq file="$theme_name/tpl/rightBlock.tpl"}>
+    <{include file="$theme_name/tpl/rightBlock.tpl"}>
 </div>
 
 </div><!-- .maincontainer -->
@@ -95,11 +95,11 @@
     <div class="bottom-blocks">
         <div class="container">
             <div class="row">
-                <{includeq file="$theme_name/tpl/leftBottom.tpl"}>
+                <{include file="$theme_name/tpl/leftBottom.tpl"}>
 
-                <{includeq file="$theme_name/tpl/centerBottom.tpl"}>
+                <{include file="$theme_name/tpl/centerBottom.tpl"}>
 
-                <{includeq file="$theme_name/tpl/rightBottom.tpl"}>
+                <{include file="$theme_name/tpl/rightBottom.tpl"}>
             </div>
         </div>
     </div><!-- .bottom-blocks -->
@@ -109,11 +109,11 @@
     <div class="footer-blocks">
         <div class="container">
             <div class="row">
-                <{includeq file="$theme_name/tpl/leftFooter.tpl"}>
+                <{include file="$theme_name/tpl/leftFooter.tpl"}>
 
-                <{includeq file="$theme_name/tpl/centerFooter.tpl"}>
+                <{include file="$theme_name/tpl/centerFooter.tpl"}>
 
-                <{includeq file="$theme_name/tpl/rightFooter.tpl"}>
+                <{include file="$theme_name/tpl/rightFooter.tpl"}>
             </div>
         </div>
     </div><!-- .footer-blocks -->

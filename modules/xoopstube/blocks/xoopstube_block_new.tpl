@@ -1,10 +1,10 @@
 <div class="xoopstube-blocks row">
-    <{foreach item=videoload from=$block.videos}>
+    <{foreach item=videoload from=$block.videos|default:null}>
         <div class="col-md-4 xoopstube-thumb">
             <a href="<{$xoops_url}>/modules/<{$videoload.dirname}>/singlevideo.php?cid=<{$videoload.cid}>&lid=<{$videoload.id}>"><{$videoload.videothumb}></a>
-            <span>
+                <span>
                     <a href="<{$xoops_url}>/modules/<{$videoload.dirname}>/singlevideo.php?cid=<{$videoload.cid}>&lid=<{$videoload.id}>"><{$videoload.title}></a>
-                <{$videoload.date}>
+                    <{$videoload.date}>
                 </span>
         </div>
     <{/foreach}>

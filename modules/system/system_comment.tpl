@@ -31,7 +31,7 @@
         </div><!-- .col-md-3 .xoops-comment-author -->
 
         <div class="col-xs-10 col-md-10 xoops-comment-text">
-            <h4><{$comment.image}><{$comment.title}></h4>
+            <h4><{$comment.image|default:''}><{$comment.title|default:''}></h4>
 
             <p class="message-text text-muted"><{$comment.text}></p>
         </div><!-- .col-md-3 -->
@@ -39,7 +39,7 @@
 
     <div class="row">
         <div class="col-xs-12 col-md-12 alignright">
-            <{if $xoops_iscommentadmin == true}>
+            <{if isset($xoops_iscommentadmin) && $xoops_iscommentadmin == true}>
                 <a href="<{$editcomment_link}>&amp;com_id=<{$comment.id}>" title="<{$lang_edit}>" class="btn btn-success btn-xs">
                     <span class="glyphicon glyphicon-edit"></span>
                 </a>
